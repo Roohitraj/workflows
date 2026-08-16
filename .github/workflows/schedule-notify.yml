@@ -10,7 +10,7 @@ on:
     - cron: '0 15 * * 1-5'   # 8:30 PM IST - DSA
     - cron: '0 16 * * 1-5'   # 9:30 PM IST - Interview prep
     - cron: '45 16 * * 1-5'  # 10:15 PM IST - English + project explanation
-    - cron: '15 17 * * 1-5'  # 10:45 PM IST - Stop studying, sleep
+    # - cron: '15 17 * * 1-5'  # 10:45 PM IST - Stop studying, sleep
 
 jobs:
   notify:
@@ -29,6 +29,4 @@ jobs:
             "15 17 * * 1-5") MSG="🌙 10:45 PM — Stop studying, sleep now" ;;
             *) MSG="Manual test ping ✅" ;;
           esac
-          # curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
-          # curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
-          curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC raj-study-8f2k1 }}
+          curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
