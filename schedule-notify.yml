@@ -30,4 +30,5 @@ jobs:
             *) MSG="Manual test ping ✅" ;;
           esac
           # curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
-          curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
+          # curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
+          curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC raj-study-8f2k1 }}
