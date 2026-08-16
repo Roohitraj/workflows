@@ -1,0 +1,33 @@
+name: Study Schedule Notifier
+
+on:
+  workflow_dispatch:        # lets you trigger a test run manually
+  schedule:
+    - cron: '0 1 * * 1-5'    # 6:30 AM IST - English speaking
+    - cron: '30 12 * * 1-5'  # 6:00 PM IST - Food/rest
+    - cron: '15 13 * * 1-5'  # 6:45 PM IST - AI/ML
+    - cron: '45 14 * * 1-5'  # 8:15 PM IST - Break
+    - cron: '0 15 * * 1-5'   # 8:30 PM IST - DSA
+    - cron: '0 16 * * 1-5'   # 9:30 PM IST - Interview prep
+    - cron: '45 16 * * 1-5'  # 10:15 PM IST - English + project explanation
+    - cron: '15 17 * * 1-5'  # 10:45 PM IST - Stop studying, sleep
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 1 * * 1-5")   MSG="🗣️ 6:30 AM — English speaking" ;;
+            "30 12 * * 1-5") MSG="🍽️ 6:00 PM — Food/rest" ;;
+            "15 13 * * 1-5") MSG="🤖 6:45 PM — AI/ML block starts" ;;
+            "45 14 * * 1-5") MSG="☕ 8:15 PM — Break" ;;
+            "0 15 * * 1-5")  MSG="💻 8:30 PM — DSA time" ;;
+            "0 16 * * 1-5")  MSG="🎯 9:30 PM — Interview prep" ;;
+            "45 16 * * 1-5") MSG="🗣️ 10:15 PM — English + project explanation" ;;
+            "15 17 * * 1-5") MSG="🌙 10:45 PM — Stop studying, sleep now" ;;
+            *) MSG="Manual test ping ✅" ;;
+          esac
+          # curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
+          curl -d "$MSG" ntfy.sh/${{ secrets.NTFY_TOPIC }}
